@@ -23,7 +23,7 @@ This project exports stories from Pivotal Tracker to a local SQLite database, he
 
    Create a `.env` file in the project root with these configurations:
 
-   ```
+   ```.env
    # Required: Get your API token from:
    # https://www.pivotaltracker.com/profile#api
    TRACKER_TOKEN="your-pivotal-tracker-token"

@@ -1,16 +1,16 @@
 {
   "name": "pivotal-tracker-dump",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/main.ts",
   "scripts": {
     "start": "ts-node src/index.ts",
     "db:push": "drizzle-kit push",
     "db:generate": "drizzle-kit generate"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["pivotal-tracker", "pivotaltracker"],
+  "author": "Teng Yang",
   "license": "MIT",
-  "description": "",
+  "description": "This project exports stories from Pivotal Tracker to a local SQLite database, helping preserve your project data before Pivotal Tracker's discontinuation.",
   "dependencies": {
     "@libsql/client": "^0.14.0",
     "axios": "^1.7.9",
