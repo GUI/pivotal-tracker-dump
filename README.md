@@ -2,7 +2,15 @@
 
 **We loved using Pivotal Tracker for years, but as the service will soon [reach its end-of-life](https://www.pivotaltracker.com/blog/2024-09-18-end-of-life).**
 
-This project exports stories from Pivotal Tracker to a local SQLite database, helping preserve your project data before Pivotal Tracker's discontinuation.
+This project exports your data from Pivotal Tracker to a local SQLite database, helping preserve your project data before Pivotal Tracker's discontinuation.
+
+The exporter creates a complete snapshot of your project with these capabilities:
+
+- [x] Memberships
+- [x] Stories
+- [x] Labels
+- [x] Comments
+- [x] File attachments (including saving files locally)
 
 ## Setup
 
