@@ -49,7 +49,9 @@ async function main() {
   logger.info(`Fetched ${memberships.length} memberships`);
 
   const labels = await trackerApi.getLabels();
-  await db.insert(schema.label).values(labels);
+  if (labels.length > 0) {
+    await db.insert(schema.label).values(labels);
+  }
   logger.info(`Fetched ${labels.length} labels`);
 
   let offset: number = 0,
@@ -140,9 +142,19 @@ async function handleStoryInsertions(
     // fetch and insert file attachments
     for (const comment of comments) {
       for (const fileAttachment of comment.file_attachments) {
-        const content = await trackerApi.downloadFileAttachment(
-          fileAttachment.id
-        );
+        let content
+        try {
+          content = await trackerApi.downloadFileAttachment(
+            fileAttachment.id
+          );
+        } catch (error) {
+          if (error?.response?.status === 404) {
+            logger.warn(`Skipping attachment that returned 404 Not Found: ${JSON.stringify(fileAttachment)}`);
+            continue;
+          } else {
+            throw error;
+          }
+        }
         updateStoryProgressBarMessage(
           `Downloaded file attachment: ${fileAttachment.filename}`
         );

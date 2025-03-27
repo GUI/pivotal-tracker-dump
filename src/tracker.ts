@@ -7,8 +7,8 @@ const TrackerToken = process.env.TRACKER_TOKEN;
 // 200 per minute per user
 const limit = pRateLimit({
   interval: 1000,
-  rate: 30,
-  concurrency: 5,
+  rate: 3,
+  concurrency: 1,
 });
 
 const PIVOTAL_TRACKER_HOST = `https://www.pivotaltracker.com`;
