@@ -45,7 +45,9 @@ async function main() {
 
   const memberships = await trackerApi.getMemberships();
   const persons = memberships.map((m) => m.person);
-  await db.insert(schema.person).values(persons);
+  if (persons.length > 0) {
+    await db.insert(schema.person).values(persons);
+  }
   logger.info(`Fetched ${memberships.length} memberships`);
 
   const labels = await trackerApi.getLabels();
@@ -134,6 +136,12 @@ async function handleStoryInsertions(
   // fetch and insert comments
   const comments = await trackerApi.getStoryComments(story_id);
   if (comments.length > 0) {
+    for (const comment of comments) {
+      if (comment.person_id === null || comment.person_id === undefined) {
+        comment.person_id = -1;
+      }
+    }
+
     await db.insert(schema.comment).values(comments);
     updateStoryProgressBarMessage(
       `Inserted ${comments.length} comments for #${story_id}`
